@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auto Fill Test Helper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup" aria-labelledby="title">
+      <h1 id="title">Auto Fill Test Helper</h1>
+      <p class="description">Generate synthetic test data for visible, editable form fields on this page.</p>
+
+      <fieldset>
+        <legend>Fill mode</legend>
+        <label>
+          <input type="radio" name="mode" value="empty" checked />
+          Empty fields only
+        </label>
+        <label>
+          <input type="radio" name="mode" value="overwrite" />
+          Overwrite existing values
+        </label>
+      </fieldset>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="requiredOnly" />
+        Required fields only
+      </label>
+
+      <button id="fillForm" type="button">Fill form</button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
