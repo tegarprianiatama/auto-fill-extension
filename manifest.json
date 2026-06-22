@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Fill Test Helper",
+  "description": "Generate synthetic test data and fill common web form fields on demand.",
+  "version": "0.1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Auto Fill Test Helper"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
