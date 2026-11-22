@@ -90,6 +90,28 @@ const AutoFillData = {
         text: 'Synthetischer Testwert',
         date: '2026-02-14'
       }
+    },
+    'indonesia': {
+      name: 'Indonesia',
+      description: 'Indonesian regional test data',
+      values: {
+        firstName: 'Budi',
+        lastName: 'Santoso',
+        fullName: 'Budi Santoso',
+        company: 'PT Teknologi Maju',
+        email: 'budi.santoso@teknologimaju.co.id',
+        phone: '08123456789',
+        address: 'Jl. Jendral Sudirman No. 45',
+        city: 'Jakarta',
+        state: 'DKI Jakarta',
+        postalCode: '10210',
+        country: 'Indonesia',
+        url: 'https://teknologimaju.co.id',
+        username: 'budisantoso',
+        password: 'Passw0rt!2024',
+        text: 'Data pendaftaran untuk pengujian fungsi otomatis',
+        date: '2026-03-15'
+      }
     }
   },
 
@@ -142,6 +164,14 @@ const AutoFillData = {
       country: 'España',
       phoneFormat: '+34 NN NNN NNNN',
       countryCode: 'ES'
+    },
+    'id-ID': {
+      city: 'Jakarta',
+      state: { abbreviation: 'DKI', fullName: 'Provinsi DKI Jakarta' },
+      postalCode: '10110',
+      country: 'Indonesia',
+      phoneFormat: '+62 8NN NNNN NNNN',
+      countryCode: 'ID'
     }
   },
 

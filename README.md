@@ -5,9 +5,9 @@ Version 2.0 - Modern Manifest V3 browser extension for automated form filling an
 ## Features
 
 - **Smart Form Filling** - Automatically fills web forms with synthetic test data
-- **Profile System** - Choose from 4 built-in profiles (Standard QA, Edge Case, Minimal, International)
+- **Profile System** - Choose from 5 built-in profiles (Standard QA, Edge Case, Minimal, International, Indonesia)
 - **Advanced DOM Support** - Works with Shadow DOM, iframes, and custom widgets
-- **Locale Support** - 6 regional locales (US, UK, DE, JP, BR, ES)
+- **Locale Support** - 7 regional locales (US, UK, DE, JP, BR, ES, ID)
 - **Context Aware Matching** - Intelligently matches fields by name, ID, placeholder, and labels
 - **Keyboard Shortcut** - Quick fill with Alt+Shift+F
 - **Console API** - Programmatically trigger fills from browser console
@@ -181,6 +181,7 @@ Regional test data for various countries
 - JP: 東京都, 東京都, 100-0001, 日本
 - BR: São Paulo, São Paulo, 01001-001, Brasil
 - ES: Madrid, Madrid, 28001, España
+- ID: Jakarta, DKI Jakarta, 10110, Indonesia
 
 ---
 
@@ -205,7 +206,7 @@ Configure fill behavior, profiles, rules, and settings:
 - Watch dynamic fields - auto-re-fill newly added fields
 
 **Localization**
-- Locale: Select from 6 regional locales
+- Locale: Select from 7 regional locales
 
 **Profiles**
 - Rename existing profiles or create new ones
