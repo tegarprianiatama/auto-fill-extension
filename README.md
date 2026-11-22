@@ -1,136 +1,234 @@
 # Auto Fill Test Helper
 
-## 🎉 Version 2.0 - Major Update
+Version 2.0 - Modern Manifest V3 browser extension for automated form filling and QA testing
 
-A powerful Manifest V3 browser extension for generating synthetic test data, filling common web form fields with intelligent context awareness, and automating QA testing workflows.
+## Features
 
-## ✨ New Features in v2.0
-
-### 4 Built-in Profiles
-- **Standard QA** - Balanced test data for general form filling
-- **Edge Case** - Long strings, emoji, and special characters to test constraints
-- **Minimal** - Characters that satisfy minimum requirements
-- **International** - Regional test data for various countries
-
-### Locale Support
-Choose from 6 supported locales:
-- United States (en-US)
-- United Kingdom (en-GB)
-- Germany (de-DE)
-- Japan (ja-JP)
-- Brazil (pt-BR)
-- Spain (es-ES)
-
-### Advanced DOM Handling
-- ✅ **Shadow DOM traversal** - No more fields hidden inside shadow roots
-- ✅ **Same-origin iframes** - Fill forms inside frames
-- ✅ **Custom widgets** - Works with Material-UI, Radix UI, React-Select, and other custom components
-- ✅ **File inputs** - Auto-generates test files (images, text files) based on `accept` attribute
-
-### Smart Field Matching
-- **Context-aware value selection** - Intelligently matches fields by name, ID, placeholder, and labels
-- **Paired fields** - Automatically mirrors values (e.g., "Confirm Email" gets the same value as "Email")
-- **Constraint awareness** - Respects `minlength`, `maxlength`, `pattern`, and numeric `step` constraints
-- **Custom field rules** - Add per-field value overrides using simple matching rules
-
-### Productivity Features
-- ⌨️ **Keyboard shortcut** - Press `Alt+Shift+F` for instant form filling
-- 📋 **Console API** - Programmatically trigger fills from browser console
-- 📱 **Side panel** - Extension UI in browser's side panel
-- 🎯 **Hot-reload detection** - Watch for dynamically added fields (optional)
-- 💾 **Configurable** - Detailed options for advanced users
-- 🔄 **Export/Import** - Save and share your configuration
-
-### Configuration Management
-- Store and manage multiple profiles
-- Add custom data generation rules
-- Export configuration as JSON
-- Import existing configurations on other workstations
-- Automatically clean up unused custom profiles
-
-### Additional Improvements
-- Context menu option to "Auto fill this form"
-- Badge updates to show fill count on active tab
-- State persistence for all settings
-- Better error handling and user feedback
-- Support for multi-step form auto-advance
+- **Smart Form Filling** - Automatically fills web forms with synthetic test data
+- **Profile System** - Choose from 4 built-in profiles (Standard QA, Edge Case, Minimal, International)
+- **Advanced DOM Support** - Works with Shadow DOM, iframes, and custom widgets
+- **Locale Support** - 6 regional locales (US, UK, DE, JP, BR, ES)
+- **Context Aware Matching** - Intelligently matches fields by name, ID, placeholder, and labels
+- **Keyboard Shortcut** - Quick fill with Alt+Shift+F
+- **Console API** - Programmatically trigger fills from browser console
+- **Custom Rules** - Per-field value overrides
+- **Options Page** - Full configuration management
+- **Export/Import** - Share configurations with your team
 
 ---
 
-## Phase 1 features (still available)
+## Installation
 
-- Manual popup action for filling forms in the active tab.
-- Empty-fields-only and overwrite modes.
-- Optional required-fields-only mode.
-- Content script that fills visible, editable native inputs, textareas, and selects.
-- Synthetic default data for common testing fields such as names, email, phone, address, company, URL, and dates.
-- Input and change events are dispatched after filling so framework-controlled forms can react to updates.
+### Load as Unpacked Extension
 
-## Run locally
+1. Open extensions page:
+   - Chrome: `chrome://extensions/`
+   - Edge: `edge://extensions/`
+   - Brave: `brave://extensions/`
 
-This extension does not require a build step for Phase 1. Load the repository directly as an unpacked extension in a Chromium-based browser.
+2. Enable **Developer mode** in top right
 
-### Prerequisites
+3. Click **Load unpacked** and select this directory
 
-- Google Chrome, Microsoft Edge, Brave, or another Chromium-based browser.
-- The repository cloned or available on your local machine.
+4. Confirm extension appears in your extensions list
 
-### Load the unpacked extension
+---
 
-1. Open the browser extensions page:
-   - Chrome: `chrome://extensions`
-   - Edge: `edge://extensions`
-   - Brave: `brave://extensions`
-2. Enable **Developer mode**.
-3. Select **Load unpacked**.
-4. Choose the repository root directory, the folder that contains `manifest.json`.
-5. Confirm that **Auto Fill Test Helper** appears in the extensions list.
-6. Pin the extension from the browser toolbar if you want quick access.
+## Usage
 
-### Try it on a local form
+### Manual Filling
 
-1. Create a temporary file named `test-form.html` anywhere on your machine.
-2. Paste this sample form into the file:
+1. Open a web page with a form
+2. Click extension icon in toolbar
+3. Select a profile (Standard QA, Edge Case, Minimal, or International)
+4. Choose fill mode:
+   - **Empty fields only** - fills blank fields only
+   - **Overwrite existing values** - replaces all values
+5. Configure options if needed (required fields, auto-advance, fill file inputs, watch dynamic fields)
+6. Click **Fill form**
 
-   ```html
-   <!doctype html>
-   <html lang="en">
-     <body>
-       <form>
-         <label>First name <input name="first_name" required /></label>
-         <label>Last name <input name="last_name" required /></label>
-         <label>Email <input type="email" name="email" required /></label>
-         <label>Phone <input type="tel" name="phone" /></label>
-         <label>Company <input name="company" /></label>
-         <label>Start date <input type="date" name="start_date" /></label>
-         <label>Team size <input type="number" name="team_size" min="1" max="20" /></label>
-         <label>Notes <textarea name="notes"></textarea></label>
-         <button type="submit">Submit</button>
-       </form>
-     </body>
-   </html>
-   ```
+### Options Page
 
-3. Open the file in the same browser where the extension is loaded.
-4. Click the **Auto Fill Test Helper** toolbar icon.
-5. Choose a fill mode:
-   - **Empty fields only** keeps existing manual input and fills only blank fields.
-   - **Overwrite existing values** replaces current field values with generated test data.
-6. Optionally enable **Required fields only** to skip optional fields.
-7. Click **Fill form**.
+Click **Settings** button in popup to access options page. Configure:
+- Profiles and values
+- Locale selection
+- Fill behavior options
+- Custom data rules
+- Export/import configuration
 
-### Reload after local changes
+### Quick Tasks
 
-When you edit extension files locally:
+- **Test forms without popup**: Use keyboard shortcut (Alt+Shift+F)
+- **Automated testing**: Use Console API: `window.autoFillTest({ mode: 'overwrite' })`
+- **Multi-step forms**: Enable "Auto-advance" to click next buttons automatically
+- **Custom fields**: Add rules via Options page for specific field values
+- **Regional testing**: Switch profiles or locales to test different regions
 
-1. Return to the browser extensions page.
-2. Find **Auto Fill Test Helper**.
-3. Click the reload icon for the unpacked extension.
-4. Refresh the page that contains the form before testing again.
+---
 
-### Troubleshooting
+## Keyboard Shortcuts
 
-- Browser internal pages such as `chrome://settings` cannot be filled by content scripts.
-- If the popup reports that the page cannot be filled, refresh the target page after reloading the extension.
-- For local `file://` forms, enable **Allow access to file URLs** for the extension on the browser extensions page.
-- The Phase 1 implementation targets native inputs, textareas, and selects. Advanced custom controls, shadow DOM fields, and multi-step workflows are planned for later phases.
+| Command | Shortcut |
+|---------|----------|
+| Fill form | Alt+Shift+F |
+
+Configure additional shortcuts in: `chrome://extensions/shortcuts`
+
+---
+
+## Console API
+
+Use from browser console (F12):
+
+```javascript
+// Basic fill with configured options
+window.autoFillTest()
+
+// Overwrite mode
+window.autoFillTest({ mode: 'overwrite', requiredOnly: false })
+
+// File inputs enabled
+window.autoFillTest({ fillFileInputs: true })
+
+// Multi-step form auto-advance
+window.autoFillTest({ autoAdvance: true })
+```
+
+Debug helper available:
+```javascript
+window.__AUTOFILL_DEBUG__.getFields()  // List detected fields
+window.__AUTOFILL_DEBUG__.getConfig()  // Get current configuration
+```
+
+---
+
+## Development
+
+### File Structure
+
+```
+auto-fill-extension/
+├── manifest.json
+├── background.js
+├── src/
+│   ├── storage.js   # Configuration management
+│   ├── data.js      # Profiles and data
+│   ├── content.js   # Main script
+│   └── main-world.js # Console API
+├── popup/           # Popup UI
+└── options/         # Options page
+```
+
+### Loading Development Build
+
+1. Enable Developer mode in `chrome://extensions/`
+2. Click **Load unpacked**
+3. Select `E:\Code\js\auto-fill-extension`
+
+### Reloading After Changes
+
+1. Go to `chrome://extensions/`
+2. Click reload icon on extension card
+3. Refresh test page (Ctrl+F5)
+
+---
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Extension doesn't fill | Reload extension, refresh form page |
+| File URLs not working | Enable "Allow access to file URLs" in extension details |
+| Cannot fill browser pages | Security restrictions prevent filling chrome://, edge:// etc |
+| Shadow DOM not working | Ensure "Fill custom widgets" is enabled, check Console errors |
+
+### Console for Debugging
+
+Open Console (F12) on test page to check for errors:
+
+```javascript
+// Inspect detected fields
+window.__AUTOFILL_DEBUG__.getFields()
+
+// Check current configuration
+window.__AUTOFILL_DEBUG__.getConfig()
+
+// List all profiles
+window.__AUTOFILL_DATA__?.profiles
+```
+
+---
+
+## Profiles
+
+### Standard QA
+Balanced test data for general form filling
+- Name: The user
+
+### Edge Case
+Long strings, special characters, and emoji to test constraints
+- Name: Ærifðu; lastName: Ñoño-Максим
+
+### Minimal
+Characters that satisfy minimum requirements
+- Values: Single character fields
+
+### International
+Regional test data for various countries
+- US: San Francisco, CA, 94102, United States
+- UK: London, England, SW1A 1AA, United Kingdom
+- DE: München, Bayern, 80331, Deutschland
+- JP: 東京都, 東京都, 100-0001, 日本
+- BR: São Paulo, São Paulo, 01001-001, Brasil
+- ES: Madrid, Madrid, 28001, España
+
+---
+
+## Options
+
+Configure fill behavior, profiles, rules, and settings:
+
+1. Open popup and click **Settings** button
+2. Or access directly: `chrome://extensions/` → Right-click extension → Options
+
+### Available Options
+
+**Fill Mode**
+- Empty fields only (default) - fill blank fields only
+- Overwrite existing values - replace all values
+
+**Behavior Settings**
+- Required fields only - fill only required fields
+- Auto-advance - click next/continue buttons in multi-step forms
+- Fill file inputs - auto-generate test files
+- Fill custom widgets - handle Shadow DOM and custom controls
+- Watch dynamic fields - auto-re-fill newly added fields
+
+**Localization**
+- Locale: Select from 6 regional locales
+
+**Profiles**
+- Rename existing profiles or create new ones
+- Update values for specific fields
+- Delete custom profiles
+
+**Data Rules**
+- Add custom field-value mappings
+- Override default behavior for specific inputs
+- Priority over profile values
+
+**Configuration Management**
+- Export configuration to JSON
+- Import configuration from JSON
+- Reset all settings to defaults
+
+---
+
+## Browser Requirements
+
+- Chrome 114+ (for side panel and all features)
+- Microsoft Edge 114+
+- Brave 114+
+- Chromium 96+ (Manifest V3)
+
+Almost all modern Chromium-based browsers are supported.
