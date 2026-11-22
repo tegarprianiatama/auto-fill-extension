@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auto Fill Test Helper - Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="options-page">
+      <header>
+        <h1>Auto Fill Test Helper - Options</h1>
+        <p class="description">Configure profiles, data generation rules, and behavior settings.</p>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="profiles">Profiles</button>
+        <button class="tab" data-tab="settings">Settings</button>
+        <button class="tab" data-tab="rules">Custom Rules</button>
+        <button class="tab" data-tab="about">About</button>
+      </nav>
+
+      <div class="tab-content active" data-tab="profiles">
+        <section class="profile-section">
+          <h2>Manage Profiles</h2>
+          <p style="color: #5f6368; font-size: 0.875rem; margin-bottom: 1rem;">
+            Switch between different test personas or create custom profiles.
+          </p>
+
+          <div class="profile-buttons">
+            <button id="createProfile" type="button" class="btn-primary">Create New Profile</button>
+            <button id="editCurrentProfile" type="button" class="btn-secondary">Edit Selected Profile</button>
+            <button id="deleteProfile" type="button" class="btn-danger">Delete Profile</button>
+          </div>
+
+          <div id="profileList" class="profile-list" style="margin-top: 1.5rem;">
+            <!-- Profile items will be inserted here -->
+          </div>
+        </section>
+      </div>
+
+      <div class="tab-content" data-tab="settings">
+        <section class="settings-section">
+          <h2>Fill Behavior Settings</h2>
+
+          <legend>
+            <h3>Mode</h3>
+          </legend>
+          <label class="checkbox-row">
+            <input type="radio" name="mode" value="empty" checked />
+            Empty fields only (fills blank fields)
+          </label>
+          <label class="checkbox-row">
+            <input type="radio" name="mode" value="overwrite" />
+            Overwrite existing values
+          </label>
+
+          <legend style="margin-top: 1.5rem;">
+            <h3>Options</h3>
+          </legend>
+          <label class="checkbox-row">
+            <input type="checkbox" id="requiredOnly" />
+            Limit to required fields only
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="autoAdvance" />
+            Auto-advance through multi-step forms (click next button)
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="fillFileInputs" checked />
+            Fill file inputs with test files
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="fillCustomWidgets" checked />
+            Fill custom widgets, Shadow DOM, and complex controls
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" id="watchDynamic" />
+            Auto-re-fill dynamically added fields
+          </label>
+
+          <legend style="margin-top: 1.5rem;">
+            <h3>Locale</h3>
+          </legend>
+          <select id="locale" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #dadce0;">
+            <option value="en-US">United States (en-US)</option>
+            <option value="en-GB">United Kingdom (en-GB)</option>
+            <option value="de-DE">Germany (de-DE)</option>
+            <option value="ja-JP">Japan (ja-JP)</option>
+            <option value="pt-BR">Brazil (pt-BR)</option>
+            <option value="es-ES">Spain (es-ES)</option>
+          </select>
+        </section>
+      </div>
+
+      <div class="tab-content" data-tab="rules">
+        <section class="rules-section">
+          <h2>Custom Data Generation Rules</h2>
+
+          <p style="color: #5f6368; font-size: 0.875rem; margin-bottom: 1rem;">
+            Add custom field-value pairs that match specific field names, IDs, or placeholders. These rules take priority over profile data.
+          </p>
+
+          <div class="rule-form">
+            <div style="margin-bottom: 0.5rem;">
+              <label for="ruleMatch">Match</label>
+              <input type="text" id="ruleMatch" placeholder="Field name, ID, placeholder, or regex pattern" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #dadce0; box-sizing: border-box;" />
+              <p style="font-size: 0.8rem; color: #5f6368; margin-top: 0.25rem;">
+                Case-insensitive partial match on field name, ID, placeholder, or text content
+              </p>
+            </div>
+
+            <div style="margin-bottom: 0.5rem;">
+              <label for="ruleValue">Value</label>
+              <input type="text" id="ruleValue" placeholder="Custom value to use for matched fields" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #dadce0; box-sizing: border-box;" />
+            </div>
+
+            <button id="addRule" type="button" class="btn-primary">Add Rule</button>
+          </div>
+
+          <div id="ruleList" class="rule-list" style="margin-top: 1.5rem;">
+            <!-- Rules will be inserted here -->
+          </div>
+        </section>
+      </div>
+
+      <div class="tab-content" data-tab="about">
+        <section class="about-section">
+          <h2>About Auto Fill Test Helper</h2>
+
+          <div class="about-card">
+            <h3>✨ Features</h3>
+            <ul>
+              <li><strong>4 Built-in Profiles</strong> - QA Standard, Edge Case, Minimal, International</li>
+              <li><strong>Locale Support</strong> - Customize city, state, postal code, phone format for different countries</li>
+              <li><strong>Advanced DOM Handling</strong>- Shadow DOM, iframes, custom widgets</li>
+              <li><strong>Smart Field Matching</strong>- Intelligent context-aware value selection</li>
+              <li><strong>Keyboard Shortcuts</strong> - Fill forms with Alt+Shift+F</li>
+              <li><strong>Console API</strong>- Programmatically trigger fills from browser console</li>
+              <li><strong>Configuration Management</strong> - Export/import your settings</li>
+              <li><strong>Multi-Step Forms</strong>- Optional auto-advance through wizard pages</li>
+            </ul>
+          </div>
+
+          <div class="about-card">
+            <h3>🛠️ Usage</h3>
+            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+              <li>Load the extension in your browser</li>
+              <li>Open a page with a form to test</li>
+              <li>Click the extension icon and press "Fill form"</li>
+              <li>Or press <code>Alt+Shift+F</code> for quick fills</li>
+              <li>Use the console API: <code>window.autoFillTest({ mode: 'overwrite' })</code></li>
+            </ol>
+          </div>
+
+          <div class="about-card">
+            <h3>🐛 Troubleshooting</h3>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem; color: #5f6368;">
+              <li>Extension doesn't fill - Refresh the target page</li>
+              <li>File:// URLs not working - Enable "Allow access to file URLs" in extensions settings</li>
+              <li>Brownser built-in pages can't be filled - NameError</li>
+              <li>Custom pages not filling - Check if the extension is loaded for that origin</li>
+            </ul>
+          </div>
+
+          <div class="about-card" style="background: #e8f0fe; border: 1px solid #a3c7f5; padding: 1rem; border-radius: 0.5rem;">
+            <h3>🔄 Version 2.0 Changes</h3>
+            <p style="color: #1967d2; font-size: 0.875rem;">
+              New features include Shadow DOM traversal, iframe support, custom widget handling, file input generation, console API, keyboard shortcuts, profile management, locale support, and configuration export/import. See README for details.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <div class="action-bar">
+        <button id="saveAll" type="button" class="btn-primary">Save All Settings</button>
+        <button id="resetDefaults" type="button" class="btn-secondary">Reset to Defaults</button>
+      </div>
+
+      <div id="status" class="status-message"></div>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

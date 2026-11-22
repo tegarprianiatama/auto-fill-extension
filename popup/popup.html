@@ -8,14 +8,38 @@
   </head>
   <body>
     <main class="popup" aria-labelledby="title">
-      <h1 id="title">Auto Fill Test Helper</h1>
-      <p class="description">Generate synthetic test data for visible, editable form fields on this page.</p>
+      <header>
+        <h1 id="title">Auto Fill Test Helper</h1>
+        <p class="description">
+          Generate synthetic test data for visible, editable form fields on this page.
+        </p>
+      </header>
+
+      <fieldset>
+        <legend>Profile</legend>
+        <label>
+          <input type="radio" name="profilePresets" value="qa-standard" checked />
+          Standard QA
+        </label>
+        <label>
+          <input type="radio" name="profilePresets" value="edge-case" />
+          Edge Case
+        </label>
+        <label>
+          <input type="radio" name="profilePresets" value="minimal" />
+          Minimal
+        </label>
+        <label>
+          <input type="radio" name="profilePresets" value="international" />
+          International
+        </label>
+      </fieldset>
 
       <fieldset>
         <legend>Fill mode</legend>
         <label>
           <input type="radio" name="mode" value="empty" checked />
-          Empty fields only
+          Empty fields only keeps existing manual input
         </label>
         <label>
           <input type="radio" name="mode" value="overwrite" />
@@ -23,13 +47,110 @@
         </label>
       </fieldset>
 
-      <label class="checkbox-row">
-        <input type="checkbox" id="requiredOnly" />
-        Required fields only
-      </label>
+      <fieldset>
+        <legend>Options</legend>
+        <label class="checkbox-row">
+          <input type="checkbox" id="requiredOnly" />
+          Required fields only
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="autoAdvance" />
+          Auto-advance (click next button)
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="fillFileInputs" checked />
+          Fill file inputs
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="fillCustomWidgets" checked />
+          Fill custom widgets & Shadow DOM
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="watchDynamic" />
+          Auto-re-fill dynamic fields
+        </label>
 
-      <button id="fillForm" type="button">Fill form</button>
+        <select id="locale" style="width: 100%; margin-top: 1rem; padding: 0.5rem;">
+          <option value="en-US">United States / English (US)</option>
+          <option value="en-GB">United Kingdom / English (UK)</option>
+          <option value="de-DE">Germany / Deutsch (DE)</option>
+          <option value="ja-JP">Japan / 日本語 (JP)</option>
+          <option value="pt-BR">Brazil / Português (BR)</option>
+          <option value="es-ES">Spain / Español (ES)</option>
+        </select>
+      </fieldset>
+
+      <div class="actions">
+        <button id="fillForm" type="button">Fill form</button>
+        <button id="optionsToggle" type="button" style="background-color: #34a853; margin-top: 0.5rem;">
+          Settings
+        </button>
+      </div>
+
       <p id="status" role="status" aria-live="polite"></p>
+
+      <div id="optionsPanel" class="options-panel hidden">
+        <div class="options-header">
+          <h2>Settings</h2>
+          <button id="optionsClose" type="button" aria-label="Close settings">&times;</button>
+        </div>
+
+        <div class="setting-section">
+          <h3>Data Customization</h3>
+          <div id="customDataInput" style="display: none;">
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">
+              Add a custom test value for a field:
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <input type="text" id="customFieldName" placeholder="Field name (e.g., email)" />
+              <input type="text" id="customFieldValue" placeholder="Custom value" />
+            </div>
+            <button id="addCustomRule" type="button" style="margin-top: 0.5rem; background-color: #1a73e8;">Add rule</button>
+            <ul id="customRulesList" style="margin-top: 1rem; padding-left: 1.2rem;"></ul>
+          </div>
+        </div>
+
+        <div class="setting-section">
+          <h3>Keyboard Shortcut</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">
+            Press <code class="kbd">Alt+Shift+F</code> to quickly fill forms without opening this popup.
+          </p>
+          <a
+            href="chrome://extensions/shortcuts"
+            target="_blank"
+            class="chrome-link"
+            rel="noopener noreferrer">
+            Change shortcut in browser settings
+          </a>
+        </div>
+
+        <div class="setting-section">
+          <h3>Console API</h3>
+          <p style="font-size: 0.85rem; color: #666;">
+            Use the browser console to trigger fills programmatically:
+          </p>
+          <pre class="api-example">window.autoFillTest({ mode: 'overwrite', requiredOnly: false })</pre>
+        </div>
+
+        <div class="setting-section">
+          <h3>DevTools</h3>
+          <p style="font-size: 0.85rem; color: #666;">
+            All extension features are now also available from the browser's console.
+          </p>
+        </div>
+
+        <div class="setting-section">
+          <h3>Export / Import</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+            <button id="exportConfig" type="button" style="background-color: #fbbc05;">Export</button>
+            <input type="file" id="importConfig" accept=".json" style="display: none;" />
+            <button id="importConfigBtn" type="button" style="background-color: #198754;">Import</button>
+          </div>
+          <button id="resetConfig" type="button" style="background-color: #d93025; font-size: 0.85rem;">
+            Reset all settings
+          </button>
+        </div>
+      </div>
     </main>
     <script src="popup.js"></script>
   </body>

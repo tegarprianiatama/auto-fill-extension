@@ -1,19 +1,78 @@
 {
   "manifest_version": 3,
   "name": "Auto Fill Test Helper",
-  "description": "Generate synthetic test data and fill common web form fields on demand.",
-  "version": "0.1.0",
+  "description": "Advanced browser extension for generating synthetic test data and filling common web form fields with intelligent context awareness.",
+  "version": "2.0.0",
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Auto Fill Test Helper"
   },
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": [],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "contextMenus",
+    "sidePanel"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["file://"],
+
+  "commands": {
+    "fill-form": {
+      "suggested_key": {
+        "default": "Alt+Shift+F",
+        "windows": "Alt+Shift+F",
+        "mac": "Alt+Shift+F"
+      },
+      "description": "Fill form with current settings"
+    }
+  },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["src/content.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/gen-data.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/main-world.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
     }
-  ]
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "side_panel": {
+    "default_path": "popup/popup.html"
+  },
+
+  "minimum_chrome_version": "114",
+  "icons": {
+    "16": "icons/autofill-16.png",
+    "48": "icons/autofill-48.png",
+    "128": "icons/autofill-128.png"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["src/main-world.js"],
+      "matches": ["<all_urls>"],
+      "extension_ids": ["*"],
+      "use_matches_url": true
+    }
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
 }
